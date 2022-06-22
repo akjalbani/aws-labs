@@ -1,0 +1,11 @@
+Abdur's Notes: Good comprehesive prep material
+URL: https://notes.arkalim.org/notes/AWS%20Solutions%20Architect%20Associate/AWS%20Solutions%20Architect%20Associate%20(SAA-C02)
+
+Stephane Maarek courses on AWS certification
+https://courses.datacumulus.com/ 
+
+AWS Certified Solutions Architect Associate Practice Exams
+https://www.udemy.com/course/aws-certified-solutions-architect-associate-amazon-practice-exams-saa-c03/
+
+Neal Davis
+https://digitalcloud.training/aws-certified-solutions-architect-associate/
