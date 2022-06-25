@@ -1,37 +1,56 @@
-## Welcome to GitHub Pages
+## Welcome to AWS Labs
 
-You can use the [editor on GitHub](https://github.com/akjalbani/aws-labs/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+### I created these labs for learning purpose
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/akjalbani/aws-labs/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+<h1 style="margin-left:0px;" id="Hide_your_IP_using_socks_proxy_on_AWS">Hide your IP using socks proxy on AWS</h1>
+<p></p>
+<p>SOCKS is an Internet protocol that exchanges network packets between a client and server through a proxy server.  A SOCKS5 proxy is <b>an alternative to a VPN</b>. It routes packets between a server and a client using a proxy server. This means that your real IP address is hidden and you access the internet with an address provided to you by a proxy provider.</p>
+<p></p>
+<p>Requirments:</p>
+<p>1. Putty installed on your computer</p>
+<p>2. AWS account - free tier / learner lab</p>
+<p></p>
+<p></p>
+<p>Step -1 : Launch Linux instance</p>
+<p><img src="./Pasted image 20220625225325.png" alt="Pasted image 20220625225325.png" style="border-radius: 4px;"" ></p>
+<p><img src="./Pasted image 20220625225416.png" alt="Pasted image 20220625225416.png" style="border-radius: 4px;"" ></p>
+<p><img src="./Pasted image 20220625225516.png" alt="Pasted image 20220625225516.png" style="border-radius: 4px;"" ></p>
+<p><img src="./Pasted image 20220625225536.png" alt="Pasted image 20220625225536.png" style="border-radius: 4px;"" ></p>
+<p><ul style="margin-left:0px;"><li>create new key pair, give name</li></ul></p>
+<p><img src="./Pasted image 20220625225649.png" alt="Pasted image 20220625225649.png" style="border-radius: 4px;"" ></p>
+<p><ul style="margin-left:0px;"><li>leave all default options and lauch the instance.</li></ul></p>
+<p></p>
+<p>Step-2 convert key pair file ( .pem) to (.ppk) file using puttygen</p>
+<p><ul style="margin-left:0px;"><li>open puttygen and convert the file and save it as private key</li></ul></p>
+<p></p>
+<p>Step-3:  open putty :</p>
+<p>Hostname : put public ip of ec2 instance</p>
+<p>port 22 save the settings</p>
+<p><img src="./Pasted image 20220625230541.png" alt="Pasted image 20220625230541.png" style="border-radius: 4px;"" ></p>
+<p>click on SSH and click on Tunnels, souce port can be any port : 9999 which is not used by your machine, Destionation is the IP address of ec2 instance and then click Add</p>
+<p><img src="./Pasted image 20220625231008.png" alt="Pasted image 20220625231008.png" style="border-radius: 4px;"" ></p>
+<p></p>
+<p>Now click on Auth to load your private key (.ppk) in putty.</p>
+<p><img src="./Pasted image 20220625231218.png" alt="Pasted image 20220625231218.png" style="border-radius: 4px;"" ></p>
+<p>now go back to session and save and load the session and then click on open</p>
+<p><img src="./Pasted image 20220625231427.png" alt="Pasted image 20220625231427.png" style="border-radius: 4px;"" ></p>
+<p></p>
+<p>Now it will login to the remote machine. </p>
+<p>login : ec2-user</p>
+<p><img src="./Pasted image 20220625231600.png" alt="Pasted image 20220625231600.png" style="border-radius: 4px;"" ></p>
+<p></p>
+<p>Step-4 Now check your host machine ip address ( note down ip)</p>
+<p><img src="./Pasted image 20220625231914.png" alt="Pasted image 20220625231914.png" style="border-radius: 4px;"" ></p>
+<p>step-5 Modify your browser settings to mannual proxy and add local host and port 9999 in the socks proxy </p>
+<p><img src="./Pasted image 20220625234448.png" alt="Pasted image 20220625234448.png" style="border-radius: 4px;"" ></p>
+<p></p>
+<p>Once you have done . open your browser and check your IP. </p>
+<p></p>
+<p>Hurry !, we are now connected to through amazon network.</p>
+<p><img src="./Pasted image 20220625234712.png" alt="Pasted image 20220625234712.png" style="border-radius: 4px;"" ></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
