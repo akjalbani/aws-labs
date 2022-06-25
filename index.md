@@ -1,12 +1,9 @@
 ## Welcome to AWS Labs
-
-
-
 ### I created these labs for learning purpose
 
 <h1 style="margin-left:0px;" id="Hide_your_IP_using_socks_proxy_on_AWS">Hide your IP using socks proxy on AWS</h1>
 <p></p>
-<p>SOCKS is an Internet protocol that exchanges network packets between a client and server through a proxy server.  A SOCKS5 proxy is <b>an alternative to a VPN</b>. It routes packets between a server and a client using a proxy server. This means that your real IP address is hidden and you access the internet with an address provided to you by a proxy provider.</p>
+<p>Lab on SOCKS is an Internet protocol that exchanges network packets between a client and server through a proxy server.  A SOCKS5 proxy is <b>an alternative to a VPN</b>. It routes packets between a server and a client using a proxy server. This means that your real IP address is hidden and you access the internet with an address provided to you by a proxy provider.</p>
 <p></p>
 <p>Requirments:</p>
 <p>1. Putty installed on your computer</p>
