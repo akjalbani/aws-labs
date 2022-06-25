@@ -28,12 +28,12 @@
 <p></p>
 <p></p>
 <p>Step -1 : Launch Linux instance</p>
-<p><img src="/aws-labs/Pasted image 20220625225325.png" alt="Pasted image 20220625225325.png" style="border-radius: 4px;"" ></p>
-<p><img src="./Pasted image 20220625225416.png" alt="Pasted image 20220625225416.png" style="border-radius: 4px;"" ></p>
-<p><img src="./Pasted image 20220625225516.png" alt="Pasted image 20220625225516.png" style="border-radius: 4px;"" ></p>
-<p><img src="./Pasted image 20220625225536.png" alt="Pasted image 20220625225536.png" style="border-radius: 4px;"" ></p>
+<p><img src="images/Pastedimage20220625225325.png" alt="Pasted image 20220625225325.png" style="border-radius: 4px;"" ></p>
+<p><img src="images/Pastedimage20220625225416.png" alt="Pasted image 20220625225416.png" style="border-radius: 4px;"" ></p>
+<p><img src="images/Pastedimage20220625225516.png" alt="Pasted image 20220625225516.png" style="border-radius: 4px;"" ></p>
+<p><img src="images/Pastedimage20220625225536.png" alt="Pasted image 20220625225536.png" style="border-radius: 4px;"" ></p>
 <p><ul style="margin-left:0px;"><li>create new key pair, give name</li></ul></p>
-<p><img src="./Pasted image 20220625225649.png" alt="Pasted image 20220625225649.png" style="border-radius: 4px;"" ></p>
+<p><img src="images/Pastedimage20220625225649.png" alt="Pasted image 20220625225649.png" style="border-radius: 4px;"" ></p>
 <p><ul style="margin-left:0px;"><li>leave all default options and lauch the instance.</li></ul></p>
 <p></p>
 <p>Step-2 convert key pair file ( .pem) to (.ppk) file using puttygen</p>
@@ -42,28 +42,28 @@
 <p>Step-3:  open putty :</p>
 <p>Hostname : put public ip of ec2 instance</p>
 <p>port 22 save the settings</p>
-<p><img src="./Pasted image 20220625230541.png" alt="Pasted image 20220625230541.png" style="border-radius: 4px;"" ></p>
+<p><img src="images/Pastedimage20220625230541.png" alt="Pasted image 20220625230541.png" style="border-radius: 4px;"" ></p>
 <p>click on SSH and click on Tunnels, souce port can be any port : 9999 which is not used by your machine, Destionation is the IP address of ec2 instance and then click Add</p>
-<p><img src="./Pasted image 20220625231008.png" alt="Pasted image 20220625231008.png" style="border-radius: 4px;"" ></p>
+<p><img src="images/Pastedimage20220625231008.png" alt="Pasted image 20220625231008.png" style="border-radius: 4px;"" ></p>
 <p></p>
 <p>Now click on Auth to load your private key (.ppk) in putty.</p>
-<p><img src="./Pasted image 20220625231218.png" alt="Pasted image 20220625231218.png" style="border-radius: 4px;"" ></p>
+<p><img src="images/Pastedimage20220625231218.png" alt="Pasted image 20220625231218.png" style="border-radius: 4px;"" ></p>
 <p>now go back to session and save and load the session and then click on open</p>
-<p><img src="./Pasted image 20220625231427.png" alt="Pasted image 20220625231427.png" style="border-radius: 4px;"" ></p>
+<p><img src="images/Pastedimage20220625231427.png" alt="Pasted image 20220625231427.png" style="border-radius: 4px;"" ></p>
 <p></p>
 <p>Now it will login to the remote machine. </p>
 <p>login : ec2-user</p>
-<p><img src="./Pasted image 20220625231600.png" alt="Pasted image 20220625231600.png" style="border-radius: 4px;"" ></p>
+<p><img src="images/Pastedimage20220625231600.png" alt="Pasted image 20220625231600.png" style="border-radius: 4px;"" ></p>
 <p></p>
 <p>Step-4 Now check your host machine ip address ( note down ip)</p>
-<p><img src="./Pasted image 20220625231914.png" alt="Pasted image 20220625231914.png" style="border-radius: 4px;"" ></p>
+<p><img src="images/Pastedimage20220625231914.png" alt="Pasted image 20220625231914.png" style="border-radius: 4px;"" ></p>
 <p>step-5 Modify your browser settings to mannual proxy and add local host and port 9999 in the socks proxy </p>
-<p><img src="./Pasted image 20220625234448.png" alt="Pasted image 20220625234448.png" style="border-radius: 4px;"" ></p>
+<p><img src="images/Pastedimage20220625234448.png" alt="Pasted image 20220625234448.png" style="border-radius: 4px;"" ></p>
 <p></p>
 <p>Once you have done . open your browser and check your IP. </p>
 <p></p>
 <p>Hurry !, we are now connected to through amazon network.</p>
-<p><img src="./Pasted image 20220625234712.png" alt="Pasted image 20220625234712.png" style="border-radius: 4px;"" ></p>
+<p><img src="images/Pastedimage20220625234712.png" alt="Pasted image 20220625234712.png" style="border-radius: 4px;"" ></p>
 <p></p>
 <p></p>
 <p></p>
