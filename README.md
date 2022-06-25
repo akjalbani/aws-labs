@@ -1,1 +1,1 @@
-# aws_cert_prep_material
+# AWS labs
