@@ -1,0 +1,75 @@
+#  Tutorial TO INSTALL XVWA on AWS EC2 instance Ubuntu 18.04 LTS
+========================================================================
+
+1. Lauch ec2 instance 
+2. select Ubuntu 18.04 LTS ( you may find it in communities AMI) 
+3. You can lauch ec2 instance in default VPC or create your own VPC.
+4. Security Group:
+    - HTTP - Anywhere
+    - SSH   - Anywhere
+    - MySQL/ Aurora - Anywhere
+ 5. Create Key-pair and download the file.
+ 6. Connect EC2 instance using SSH client or you can use GitBash on windows machine:
+    ssh -i "key-pair-filename.pem" ubuntu@public-ip
+ 7. Switch to root user 
+    sudo bash
+ 8. Install Apache web server
+    apt install apache2
+9. Install MySQL – Server
+    apt install mysql-server
+10. Install PHP
+    sudo apt install php7.2
+11. Restart Apache web server 
+   sudo systemctl restart apache2
+12. Open web-browser and check the web server running - if you see default page of web server, it means running perfectly fine
+    url: http://public-ip-ec2
+13. Configuring MySQL
+    mysql -u root -p
+    password: Y007
+ 14. Execute following commands on sql prompt
+    sq> GRANT ALL PRIVILEGES ON *.* TO 'ubuntu'@'%';
+    sql> flush privileges;
+    sql> quit
+15. Install PHPMyAdmin
+   sudo apt install phpmyadmin
+16. Now lets us Setup XVWA . change the directory to web server root directory
+   cd /var/www/html
+17. clone the git repo of xvwa- repo contain script in the BASH directory to install xvwa
+   git clone https://github.com/s4n7h0/Script-Bucket.git
+18. change directory to BASH
+  cd Script-Bucket/Bash/
+ 19. Execute the bash script and provide username, password and path
+   ./xvwa_setup.sh
+   
+   username : ubuntu
+   pass Y007
+   path = /var/www/html/
+20. Go to XVWA directory and nano config.php and verify the contents as below:
+check config.php should look like below:
+====================================================================
+<?php
+$XVWA_WEBROOT = "";
+$host = "localhost";
+$dbname = 'xvwa';
+$user = "ubuntu";
+$pass = "Y007";
+$conn = new mysqli($host,$user,$pass,$dbname);
+$conn1 = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+$conn1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+?>
+
+===============================================================================
+
+Hurry! Ecerything is setup, now let us open the xvwa server in the browser.
+
+http://public-ip-ec2/xvwa
+
+Finally, you will see the XVWA server running, 
+user/pass = admin/admin ; xvwa/xvwa
+id above password are not working, then click on setup page and run setup to configure database.
+
+check for more information on the webserver instructions page.
+
+================================================================
+
+
