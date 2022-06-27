@@ -2,7 +2,7 @@
 ========================================================================
 
 1. Lauch ec2 instance 
-2. select Ubuntu 18.04 LTS ( you may find it in communities AMI) 
+2. select Ubuntu 18.04 LTS 
 3. You can lauch ec2 instance in default VPC or create your own VPC.
 4. Security Group:
     - HTTP - Anywhere
