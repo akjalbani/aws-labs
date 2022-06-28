@@ -10,29 +10,30 @@
     - MySQL/ Aurora - Anywhere
  5. Create Key-pair and download the file.
  6. Connect EC2 instance using SSH client or you can use GitBash on windows machine:
-    ssh -i "key-pair-filename.pem" ubuntu@public-ip
+    $ ssh -i "key-pair-filename.pem" ubuntu@public-ip
  7. Switch to root user 
-    sudo bash
-    create password for ubuntu user
-    passwd
+    $ sudo bash
+    create password for ubuntu user, please notedown this password.
+    $ passwd
+    New Password: Y007
     
     and update the VM before installing apache2 server
-    sudo apt update 
+    $ sudo apt update 
  8. Install Apache web server
-    apt install apache2
+    $ apt install apache2
     // note sometime it may not install apache, after running apt install apache2 and you got error or warning or install terminates
-    // then update ( sudo apt update ) and install apache2 (apt install apache2) again
+    // then update ( $ sudo apt update ) and install apache2 ($ apt install apache2) again
     
 9. Install MySQL – Server
-    apt install mysql-server
+    $ apt install mysql-server
 10. Install PHP
-    sudo apt install php7.2
+    $ sudo apt install php7.2
 11. Restart Apache web server 
-   sudo systemctl restart apache2
+   $ sudo systemctl restart apache2
 12. Open web-browser and check the web server running - if you see default page of web server, it means running perfectly fine
     url: http://public-ip-ec2
 13. Configuring MySQL
-    mysql -u root -p
+    $ mysql -u root -p
     password: Y007
  14. Execute following commands on sql prompt
     sql> CREATE USER 'ubuntu'@'%' IDENTIFIED WITH mysql_native_password BY 'Y007';
@@ -40,21 +41,21 @@
     sql> flush privileges;
     sql> quit
 15. Install PHPMyAdmin
-   sudo apt install phpmyadmin
+   $ sudo apt install phpmyadmin
    // make sure the mysql server password you entered is same here
-   sudo systemctl start mysql
+   $ sudo systemctl start mysql
 16. Now lets us Setup XVWA . change the directory to web server root directory
-   cd /var/www/html
+   $ cd /var/www/html
 17. clone the git repo of xvwa- repo contain script in the BASH directory to install xvwa
-   git clone https://github.com/s4n7h0/Script-Bucket.git
+   $ git clone https://github.com/s4n7h0/Script-Bucket.git
 18. change directory to BASH
-  cd Script-Bucket/Bash/
+  $ cd Script-Bucket/Bash/
  19. Execute the bash script and provide username, password and path
-   ./xvwa_setup.sh
+   $ ./xvwa_setup.sh
    
    username : ubuntu
    pass Y007
-   path = /var/www/html/
+   path = /var/www/html
 20. Go to XVWA directory and nano config.php and verify the contents as below:
 make sure that user is ubuntu and mysql server password is correct for the user.
 check config.php should look like below:
@@ -76,12 +77,14 @@ Hurry! Ecerything is setup, now let us open the xvwa server in the browser.
 
 http://public-ip-ec2/xvwa
 
-Finally, you will see the XVWA server running, 
+Finally, you will see the XVWA server running, click on the setup to create database. Once created now you can login
+with following credentials.
 user/pass = admin/admin ; xvwa/xvwa
-id above password are not working, then click on setup page and run setup to configure database.
 
 check for more information on the webserver instructions page.
 
 ================================================================
+
+Ejoy learning!!!!!!!!!!!!!!!!!!!
 
 
