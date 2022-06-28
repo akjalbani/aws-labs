@@ -24,7 +24,7 @@
 12. Open web-browser and check the web server running - if you see default page of web server, it means running perfectly fine
     url: http://public-ip-ec2
 13. Configuring MySQL
-    mysql -u root -p
+    mysql -u ubuntu -p
     password: Y007
  14. Execute following commands on sql prompt
     sq> GRANT ALL PRIVILEGES ON *.* TO 'ubuntu'@'%';
@@ -32,6 +32,8 @@
     sql> quit
 15. Install PHPMyAdmin
    sudo apt install phpmyadmin
+   // make sure the mysql server password you entered is same here
+   sudo systemctl start mysql
 16. Now lets us Setup XVWA . change the directory to web server root directory
    cd /var/www/html
 17. clone the git repo of xvwa- repo contain script in the BASH directory to install xvwa
@@ -45,6 +47,7 @@
    pass Y007
    path = /var/www/html/
 20. Go to XVWA directory and nano config.php and verify the contents as below:
+make sure that user is ubuntu and mysql server password is correct for the user.
 check config.php should look like below:
 ====================================================================
 <?php
