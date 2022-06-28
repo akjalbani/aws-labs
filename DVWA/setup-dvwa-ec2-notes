@@ -1,0 +1,79 @@
+#  Tutorial TO INSTALL DVWA on AWS EC2 instance Ubuntu 18.04 LTS
+========================================================================
+
+1. Lauch ec2 instance 
+2. select Ubuntu 18.04 LTS 
+3. You can lauch ec2 instance in default VPC or create your own VPC.
+4. Security Group:
+    - HTTP - Anywhere
+    - SSH   - Anywhere
+    - MySQL/ Aurora - Anywhere
+ 5. Create Key-pair and download the file.
+ 6. Connect EC2 instance using SSH client or you can use GitBash on windows machine:
+    $ ssh -i "key-pair-filename.pem" ubuntu@public-ip
+ 7. Switch to root user 
+    $ sudo bash
+    create password for ubuntu user, please notedown this password.
+    $ passwd
+    New Password: Y007
+    
+    and update the VM before installing apache2 server
+    $ sudo apt update 
+ 8. Install Apache web server
+    $ apt install apache2
+    // note sometime it may not install apache, after running apt install apache2 and you got error or warning or install terminates
+    // then update ( $ sudo apt update ) and install apache2 ($ apt install apache2) again
+    
+9. Install MySQL – Server
+    $ apt install mysql-server
+10. Install PHP
+    $ sudo apt install php7.2
+11. Restart Apache web server 
+   $ sudo systemctl restart apache2
+12. Open web-browser and check the web server running - if you see default page of web server, it means running perfectly fine
+    url: http://public-ip-ec2
+13. Configuring MySQL
+    $ mysql -u root -p
+    password: Y007
+ 14. Execute following commands on sql prompt
+    sql> CREATE USER 'ubuntu'@'%' IDENTIFIED WITH mysql_native_password BY 'Y007';
+    sql> GRANT ALL PRIVILEGES ON *.* TO 'ubuntu'@'%';
+    sql> flush privileges;
+    sql> quit
+15. Install PHPMyAdmin
+   $ sudo apt install phpmyadmin
+   // make sure the mysql server password you entered is same here
+   $ sudo systemctl start mysql
+16. Now lets us Setup DVWA . change the directory to web server root directory
+   $ cd /var/www/html
+17. clone the git repo of DVWA- repo
+   $ git clone https://github.com/ethicalhack3r/DVWA
+18. change directory to config and rename the config file to php
+   $ cd /dvwa/config
+    $ mv config.inc.php.dist config.inc.php
+ 19. Now open the config file using nano; where you will find that db user is ubuntu and db password is Y007.
+   ['db_user'] : ubuntu
+   ['db_password'] = Y007
+   once you made the changes, save the file
+   20. Now open the browser and setup the DVWA
+   http://public-ip-ec2/DVWA/setup.php
+   21. You should see DVWA setup page, scroll down the page and click on create
+   22. Once everything done correctly, you should be redirected to the login page.
+   
+ ===============================================================================
+Hurry! Ecerything is setup, now let us open the DVWA server in the browser.
+
+http://public-ip-ec2/DVWA/
+
+Finally, you will see the DVWA server running, click on the setup to create database. Once created now you can login
+with admin/password by default.
+
+check for more information on the webserver instructions page.
+
+================================================================
+
+Ejoy learning!!!!!!!!!!!!!!!!!!!
+
+
+
+
