@@ -17,6 +17,9 @@
     sudo apt update 
  8. Install Apache web server
     apt install apache2
+    // note sometime it may not install apache, after running apt install apache2 and you got error or warning or install terminates
+    // then update ( sudo apt update ) and install apache2 (apt install apache2) again
+    
 9. Install MySQL – Server
     apt install mysql-server
 10. Install PHP
