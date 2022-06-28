@@ -13,6 +13,8 @@
     ssh -i "key-pair-filename.pem" ubuntu@public-ip
  7. Switch to root user 
     sudo bash
+    and update the VM before installing apache2 server
+    sudo apt update 
  8. Install Apache web server
     apt install apache2
 9. Install MySQL – Server
