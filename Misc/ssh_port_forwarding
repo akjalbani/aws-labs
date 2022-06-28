@@ -1,0 +1,49 @@
+## This tutorial was origionaly created by one of my student: @Egor for our cloud labs.
+## 
+
+========================
+SSH SERVER CONFIGURATION
+========================
+
+# Create an Amazon Linux 2 t2.micro EC2 instance:
+
+  - Add a "CUSTOM TCP, PORT 443" inbound traffic rule to the Security Group
+  - Use a new or existing .pem key-pair for the initial connection/configuration
+
+# Configure OpenSSH Server:
+
+  - SSH into the instance using its public IP:
+    - ssh -i my-key.pem ec2-user@<PUBLIC IP>
+
+  - Set a password for root user:
+    - sudo su
+    - passwd
+
+  - Open the OpenSSH Server configuration file:
+    - sudo nano /etc/ssh/sshd_config
+
+  - Uncomment and/or change the following options:
+    - Port 443
+    - PermitRootLogin yes
+    - PasswordAuthentication yes
+    - AllowTcpForwarding yes
+
+  - Save the configuration changes and reload the SSH daemon:
+    - sudo systemctl restart sshd
+
+  - Close the session and test the connection:
+    - ssh root@<SSH SERVER PUBLIC IP> -p 443
+
+
+
+==================================
+ESTABLISH A PORT-FORWARDING TUNNEL
+==================================
+
+  - Start a new session, mapping a local port to a remote port (SSH, in this example) of another machine:
+    - ssh -L localhost:9999:<TARGET PUBLIC IP>:22 root@<SSH SERVER PUBLIC IP> -p 443
+
+  - If the connection succeeds, proceed to connect to the <TARGET PUBLIC IP> instance:
+    - ssh -i my-key.pem username@localhost -p 9999
+    
+    
