@@ -6,3 +6,13 @@ Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\W
 
 New-NetFirewallRule -DisplayName 'RDPPORTLatest-TCP-In' -Profile 'Public' -Direction Inbound -Action Allow -Protocol TCP -LocalPort $portvalue 
 New-NetFirewallRule -DisplayName 'RDPPORTLatest-UDP-In' -Profile 'Public' -Direction Inbound -Action Allow -Protocol UDP -LocalPort $portvalue 
+
+==================================================================================
+## IF YOU WANT TO CHANGE ADMINISTRATOR PASSWORD THEN USE FOLLOWING COMMANDS
+
+$pass = Read-Host -Prompt "Set Password" -AsSecureString
+
+# set a strong password and save it some place, you will need this to login to remote machine.
+
+Set-LocalUser administrator -Password $pass
+--------------------------------------------------------------------------------------
