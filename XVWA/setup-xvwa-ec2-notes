@@ -16,7 +16,7 @@
     $ sudo bash
     create password for ubuntu user, please notedown this password.
     $ passwd
-    New Password: Y007
+    New Password: P@ssw0rd!
     
     and update the VM before installing apache2 server
     $ sudo apt update 
