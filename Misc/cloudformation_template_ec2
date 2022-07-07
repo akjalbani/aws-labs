@@ -7,17 +7,7 @@
 ==============================================
 
 
-
-Following are the required paramemters to define in the cloud formation template before creating stack. These parameters are as follows:
-
-1- the Amazon Machine Image (AMI) ID the new EC2 instance will use;
-2- the EC2 instance type
-3- the VPC ID and subnet ID where the instance will be launched
-4- at least one security group ID; and
-5- an EC2 key pair name.
-
-
-For this example, we will assume a key pair was already created and a security group ID is already known, prior to creating the EC2 instance.
+##For this example, we will assume a key pair was already created and a security group ID is already known, prior to creating the EC2 instance.
 ### you can use any IDE or notepad te create cloudformation template, you need to save it with .yaml extesnion.
 
 
