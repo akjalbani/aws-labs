@@ -6,6 +6,7 @@ Resources:
     Properties:
       InstanceType: t2.micro
       ImageId: ami-0cff7528ff583bf9a
+      KeyName: mykey
       SecurityGroups:
       - !Ref InstanceSecurityGroup
   InstanceSecurityGroup:
@@ -17,3 +18,16 @@ Resources:
         FromPort: 22
         ToPort: 22
         CidrIp: 0.0.0.0/0
+Outputs:
+  InstanceId:
+    Description: InstanceId of the newly created EC2 instance
+    Value: !Ref 'Ec2Instance'
+  AZ:
+    Description: Availability Zone of the newly created EC2 instance
+    Value: !GetAtt [Ec2Instance, AvailabilityZone]
+  PublicDNS:
+    Description: Public DNSName of the newly created EC2 instance
+    Value: !GetAtt [Ec2Instance, PublicDnsName]
+  PublicIP:
+    Description: Public IP address of the newly created EC2 instance
+    Value: !GetAtt [Ec2Instance, PublicIp]
