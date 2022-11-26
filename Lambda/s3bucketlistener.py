@@ -3,7 +3,7 @@
 # 1. IAM ROLE required (S3Bucket Full access, Cloud Watch full access, Transcribe) - if you are using AWS Academy, attach LABROLE
 # 2. Create S3 bucket with attach event.
 # 3. upload audio file
-# 
+# Ref: https://towardsdatascience.com/a-quick-tutorial-to-aws-transcribe-with-python-53bbf6605a55 
 
 import boto3
 import uuid
