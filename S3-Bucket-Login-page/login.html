@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+</head>
+<body>
+	<h1>Login</h1>
+	<form id="loginForm">
+		<label for="username">Username:</label>
+		<input type="text" name="username" id="username" required>
+		<br>
+		<label for="password">Password:</label>
+		<input type="password" name="password" id="password" required>
+		<br>
+		<input type="submit" value="Login">
+	</form>
+
+	<script>
+		document.getElementById('loginForm').addEventListener('submit', function(event) {
+			event.preventDefault();
+			var form = event.target;
+			var data = {
+				username: form.username.value,
+				password: form.password.value
+			};
+
+			fetch('https://YOUR_API_GATEWAY_URL/login', {
+				method: 'POST',
+				body: JSON.stringify(data),
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				redirect: 'follow'
+			}).then(function(response) {
+				if (response.status === 302) {
+					window.location.href = response.headers.get('Location');
+				} else {
+					window.location.href = 'https://s3.amazonaws.com/YOUR_BUCKET/error.html';
+				}
+			}).catch(function(error) {
+				window.location.href = 'https://s3.amazonaws.com/YOUR_BUCKET/error.html';
+			});
+		});
+	</script>
+</body>
+</html>
