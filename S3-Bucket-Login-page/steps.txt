@@ -1,0 +1,150 @@
+Step-by-step tutorial on how to create a DynamoDB database for users and use Lambda function to register and login users, and redirect them to training.html page once they are logged in.
+
+Step 1: Create DynamoDB table for users
+First, let's create a DynamoDB table to store user data. Follow these steps:
+•	Go to the AWS Management Console and search for "DynamoDB".
+•	Click on "Create table".
+•	Enter "Users" as the table name.
+•	Set "Username" as the primary key and choose "String" as the data type.
+•	Click on "Create".
+•	Now you can add additional attributes to the table such as "Password", "First name", "Last name", and "Address". Choose "String" as the data type for each attribute.
+Step 2: Host registration.html, login.html, and training.html pages on S3 bucket
+Next, we need to create an S3 bucket and host our HTML pages. Follow these steps:
+•	Go to the AWS Management Console and search for "S3".
+•	Click on "Create bucket".
+•	Enter a unique name for your bucket and choose the region.
+•	Click on "Create".
+•	Upload your HTML pages to the S3 bucket.
+Step 3: Create Lambda function to register a user
+Now let's create a Lambda function to register a user. Follow these steps:
+•	Go to the AWS Management Console and search for "Lambda".
+•	Click on "Create function".
+•	Choose "Author from scratch".
+•	Enter a name for your function and choose "Python 3.9" as the runtime.
+•	Under "Permissions", select "Create a new role with basic Lambda permissions".
+•	Click on "Create function".
+•	Replace the code in the editor with the following:
+import boto3
+
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('Users')
+
+def lambda_handler(event, context):
+    username = event['username']
+    password = event['password']
+    first_name = event['first_name']
+    last_name = event['last_name']
+    address = event['address']
+    
+    table.put_item(
+        Item={
+            'Username': username,
+            'Password': password,
+            'First name': first_name,
+            'Last name': last_name,
+            'Address': address
+        }
+    )
+    
+    return {
+        'statusCode': 200,
+        'body': 'User registered successfully'
+    }
+Click on "Deploy" to deploy your function.
+Step 4: Create Lambda function to login a user
+Next, let's create a Lambda function to login a user. Follow these steps:
+•	Go to the AWS Management Console and search for "Lambda".
+•	Click on "Create function".
+•	Choose "Author from scratch".
+•	Enter a name for your function and choose "Python 3.9" as the runtime.
+•	Under "Permissions", select "Create a new role with basic Lambda permissions".
+•	Click on "Create function".
+•	Replace the code in the editor with the following:
+import boto3
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('Users')
+def lambda_handler(event, context):
+    username = event['username']
+    password = event['password']
+        response = table.get_item(
+        Key={
+            'Username': username
+        }
+    )
+    
+    if 'Item' not in response:
+        return {
+            'statusCode': 404,
+            'body': 'User not found'
+        }
+    
+    user = response['Item']
+    
+    if user['Password'] != password:
+        return {
+            'statusCode': 401,
+            'body': 'Invalid password'
+        }
+    
+    return {
+        'statusCode': 302,
+        'headers': {
+            'Location': 'https://s3.amazonaws.com/YOUR_BUCKET/training.html'
+        }
+    }
+Replace "YOUR_BUCKET" with the name of your S3 bucket.
+
+Step 5: Create API Gateway to trigger the Lambda functions
+Now we need to create an API Gateway to trigger our Lambda functions. Follow these steps:
+•	Go to the AWS Management Console and search for "API Gateway".
+•	Click on "Create API".
+•	Choose "REST API" and click on "Build".
+•	Choose "New API" and enter a name for your API.
+•	Click on "Create API".
+•	Click on "Create Resource" and enter a name for your resource.
+•	Click on "Create Method" and choose "POST".
+•	Select "Lambda Function" as the integration type.
+•	Choose the region where your Lambda function is deployed.
+•	Choose your Lambda function for each method.
+•	Click on "Save".
+•	Click on "Actions" and select "Deploy API".
+•	Choose "New Stage" and enter a name for your stage (e.g. "dev").
+•	Click on "Deploy".
+Once the API is deployed, you will see an "Invoke URL" in the "Stages" tab. Copy this URL as you will need it to make requests to your API.
+Step 6: Test the API
+Now that we have created the API Gateway, we can test the API using the "Invoke URL" that we copied in step 15. You can use tools like Postman to test the API.
+
+To register a user, make a POST request to the API with the following JSON payload:
+{
+    "username": "user1",
+    "password": "password1",
+    "firstName": "John",
+    "lastName": "Doe",
+    "address": "123 Main St."
+}
+To login, make a POST request to the API with the following JSON payload:
+{
+    "username": "user1",
+    "password": "password1"
+}
+If the username and password are correct, the API will redirect to the training.html page. If the username or password is incorrect, the API will return an error.
+Step 7: Host registration.html, login.html, and training.html on S3
+Now that our API is working, we can host our HTML files on an S3 bucket. Here are the steps to create an S3 bucket and upload the files:
+
+•	Go to the AWS Management Console and search for "S3".
+•	Click on "Create Bucket".
+•	Enter a name for your bucket and choose a region.
+•	Click on "Create".
+•	Click on your bucket and choose "Upload".
+•	Choose the files you want to upload (registration.html, login.html, and training.html).
+•	Click on "Upload".
+•	Once the files are uploaded, select them and click on "Actions" and then "Make Public".
+•	In the pop-up window, click on "Make Public".
+•	You should now be able to access the HTML files from the following URLs:
+o	https://s3.amazonaws.com/YOUR_BUCKET/registration.html
+o	https://s3.amazonaws.com/YOUR_BUCKET/login.html
+o	https://s3.amazonaws.com/YOUR_BUCKET/training.html
+o	Replace "YOUR_BUCKET" with the name of your S3 bucket.
+
+Step 8: Test the website
+Now that we have hosted the HTML files on S3, we can test the website. Simply open the registration.html file in your web browser and try registering a user. Once you have registered a user, you can try logging in and accessing the training.html page.
