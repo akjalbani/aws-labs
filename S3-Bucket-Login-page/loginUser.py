@@ -19,4 +19,17 @@ def lambda_handler(event, context):
             'body': 'User not found'
         }
     
-   
+    user = response['Item']
+    
+    if user['Password'] != password:
+        return {
+            'statusCode': 401,
+            'body': 'Invalid password'
+        }
+    
+    return {
+        'statusCode': 302,
+        'headers': {
+            'Location': 'https://s3.amazonaws.com/YOUR_BUCKET/training.html'
+        }
+    }
