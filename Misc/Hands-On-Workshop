@@ -5,6 +5,27 @@ sudo yum install httpd -y
 -> Start the Apache service
 sudo systemctl start httpd
 sudo systemctl enable httpd
+
+===================================================
+For windows - here is the userdata script to automate changes at bootstrap
+<powershell>
+# Set RDP Port
+$portvalue = 443
+Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name "PortNumber" -Value $portvalue
+
+# Update Firewall Rules for New RDP Port
+New-NetFirewallRule -DisplayName 'RDPPORTLatest-TCP-In' -Profile 'Public' -Direction Inbound -Action Allow -Protocol TCP -LocalPort $portvalue
+New-NetFirewallRule -DisplayName 'RDPPORTLatest-UDP-In' -Profile 'Public' -Direction Inbound -Action Allow -Protocol UDP -LocalPort $portvalue
+
+# Set Administrator Password
+# Replace 'YourSecurePasswordHere!' with a strong password
+$securePassword = ConvertTo-SecureString "YourSecurePasswordHere!" -AsPlainText -Force
+Set-LocalUser -Name "Administrator" -Password $securePassword
+</powershell>
+### Once Windows instance state is running ans test checks are passed, resrtat the windows instance before
+RDP into instance. USe public_ip:443 or public_dns:443 to login to instance.
+
+==================================================================================
 -> Demo website
 https://github.com/akjalbani/demo_web/blob/main/demo_site.zip
 -> Bucket Policy
