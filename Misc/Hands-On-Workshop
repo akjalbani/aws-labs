@@ -1,0 +1,70 @@
+- Install a Web Server on Amazon EC2 AMI
+sudo yum update -y
+-> Install Apache:
+sudo yum install httpd -y
+-> Start the Apache service
+sudo systemctl start httpd
+sudo systemctl enable httpd
+-> Demo website
+https://github.com/akjalbani/demo_web/blob/main/demo_site.zip
+-> Bucket Policy
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+        "Principal": "*",
+        "Effect": "Allow",
+        "Action": "s3:GetObject",
+        "Resource": "arn:aws:s3:::my-static-workshop-website-bucket/*"
+    }
+  ]
+}
+
+-> Lambda function
+import json
+import urllib.parse
+import boto3
+
+s3 = boto3.client('s3')
+
+def lambda_handler(event, context):
+    # 1 - Get the bucket name
+    bucket = event['Records'][0]['s3']['bucket']['name']
+    
+    # 2 - Get the file/key name
+    key = urllib.parse.unquote_plus(event['Records'][0]['s3']['object']['key'], encoding='utf-8')
+    
+    try:
+        # 3 - Fetch the file from S3
+        response = s3.get_object(Bucket=bucket, Key=key)
+        
+        # 4 - Deserialize the file's content
+        text = response['Body'].read().decode()
+        data = json.loads(text)
+        
+        # 5 - Print the content
+        print(data)
+        
+        # 6 - Parse and print the transactions
+        transactions = data['transactions']
+        for record in transactions:
+            print(record['transType'])
+            
+        return 'Success!'
+    except Exception as e:
+        print(e)
+        raise e
+
+-> transactions.json
+{
+    "transactions": [
+        {
+            "transType": "PURCHASE",
+            "amount": 5.07
+        },
+        {
+            "transType": "REFUND",
+            "amount": 25.00
+        }
+    ]
+}
