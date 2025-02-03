@@ -1,0 +1,6 @@
+sudo yum -y update
+sudo yum install httpd -y
+sudo systemctl start httpd
+sudo systemctl enable httpd
+sudo su 
+echo "<h1>Welcome to AWS Workshop</h1>" > /var/www/html/index.html
