@@ -1,0 +1,13 @@
+#/bin/bash
+
+# update the package repository 
+sudo yum update -y
+
+# install Nginx
+sudo yum install -y nginx
+
+# create simple HTML file using echo
+sudo echo "<html><body><h1>Welcome to my first Page </h1></body></html>" > /usr/share/nginx/html/index/html
+
+# start Nginx Service
+sudo systemctl start nginx
