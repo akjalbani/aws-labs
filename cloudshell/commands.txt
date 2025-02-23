@@ -1,0 +1,17 @@
+List all EC2 instances:  aws ec2 describe-instances
+Start an EC2 instance : aws ec2 start-instances --instance-ids i-xxxxxxxxxxxxxxxxx
+Stop an EC2 instance : aws ec2 stop-instances --instance-ids i-xxxxxxxxxxxxxxxxx
+Terminate an EC2 instance: aws ec2 terminate-instances --instance-ids i-xxxxxxxxxxxxxxxxx
+List available EC2 instance types in a region: aws ec2 describe-instance-types --region us-east-1
+List all available AWS regions: aws ec2 describe-regions
+To find the public IP address of an AWS EC2 instance, use one of the following methods: aws ec2 describe-instances --query "Reservations[*].Instances[*].PublicIpAddress" --output table
+To find the operating system of an AWS EC2 instance, you can use the following methods: aws ec2 describe-instances --query "Reservations[*].Instances[*].ImageId" --output table
+List all IAM users: aws iam list-users
+List IAM roles: aws iam list-roles
+Find VPC ID: aws ec2 describe-instances --query "Reservations[*].Instances[*].[InstanceId, VpcId]" --output table 
+Once you have the VPC ID, find the VPC Name (from tags) and CIDR block: aws ec2 describe-vpcs --query "Vpcs[*].[VpcId, CidrBlock, Tags[?Key=='Name'].Value | [0]]" --output table
+For Specific VPC ID : aws ec2 describe-vpcs --vpc-ids vpc-0e43bf1ba920a6be0 --query "Vpcs[*].[VpcId, CidrBlock, Tags[?Key=='Name'].Value | [0]]" --output table
+Find All Subnets with VPC IDs: aws ec2 describe-subnets --query "Subnets[*].[SubnetId, VpcId, CidrBlock, AvailabilityZone, Tags[?Key=='Name'].Value | [0]]" --output table
+Find Subnets for a Specific VPC: aws ec2 describe-subnets --filters "Name=vpc-id,Values=vpc-04a19469940f029ba" --query "Subnets[*].[SubnetId, CidrBlock, AvailabilityZone, Tags[?Key=='Name'].Value | [0]]" --output table
+List All S3 Buckets (Bucket Names): aws s3 ls
+Get the Bucket Policy for a Specific Bucket: aws s3api get-bucket-policy --bucket my-bucket-name --query "Policy" --output json
